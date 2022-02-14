@@ -26,10 +26,6 @@ app.use(express.json())
 
 routes(app)
 
-app.get('/', (req, res) => {
-  res.send('Hello World')
-})
-
 app.listen(SERVER_PORT, () => {
   console.log(`Server is running on port ${SERVER_PORT}`)
 })

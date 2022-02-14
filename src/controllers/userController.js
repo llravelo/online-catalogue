@@ -9,7 +9,10 @@ let refreshTokens = []
 
 const signupUser = async (req, res) => {
   try {
-    const { password } = req.body
+    const { user: userId, password } = req.body
+    const existingUSer = await User.find({ user: userId })
+    if (existingUSer.length >= 1) return res.status(403).json({ message: 'User already exists' })
+
     const salt = await bcrypt.genSalt()
     let hashedPassword
 
@@ -17,7 +20,7 @@ const signupUser = async (req, res) => {
 
     const newUser = new User({ ...req.body, password: hashedPassword })
     newUser.save((err, user) => {
-      if (err) res.send(err)
+      if (err) return res.send(err)
       res
         .status(201)
         .json(user)
@@ -82,17 +85,17 @@ const token = (req, res) => {
 }
 
 const getUsers = (req, res) => {
-  User.find({}, (err, user) => {
-    if (err) res.send(err)
+  User.find({}, (err, users) => {
+    if (err) return res.send(err)
     res
       .status(200)
-      .json(user)
+      .json(users)
   })
 }
 
 const findUserByID = (req, res) => {
   User.findById(req.params.userID, (err, user) => {
-    if (err) res.send(err)
+    if (err) return res.send(err)
     res
       .status(200)
       .json(user)
@@ -109,5 +112,6 @@ module.exports = {
   signoutUser,
   token,
   getUsers,
-  findUserByID
+  findUserByID,
+  User
 }
