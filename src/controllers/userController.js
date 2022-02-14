@@ -1,3 +1,4 @@
+const https = require('https')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose')
@@ -84,6 +85,30 @@ const token = (req, res) => {
   })
 }
 
+// External API
+const validateEmail = (req, res) => {
+  const { email } = req.params
+
+  const options = {
+    hostname: 'www.disify.com',
+    port: 443,
+    path: `/api/email/${email}`,
+    method: 'GET'
+  }
+
+  const request = https.request(options, result => {
+    result.on('data', d => {
+      res.send(d)
+    })
+  })
+
+  request.on('error', error => {
+    res.send(error)
+  })
+
+  request.end()
+}
+
 const getUsers = (req, res) => {
   User.find({}, (err, users) => {
     if (err) return res.send(err)
@@ -111,6 +136,7 @@ module.exports = {
   signinUser,
   signoutUser,
   token,
+  validateEmail,
   getUsers,
   findUserByID,
   User

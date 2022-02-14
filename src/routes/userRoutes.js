@@ -3,6 +3,7 @@ const {
   signinUser,
   signoutUser,
   token,
+  validateEmail,
   getUsers,
   findUserByID
 } = require('../controllers/userController')
@@ -20,6 +21,9 @@ const routes = (app) => {
 
   app.route('/token')
     .post(token)
+
+  app.route('/validate/email/:email')
+    .get(validateEmail)
 
   app.route('/user')
     .get(verifyToken, getUsers)
