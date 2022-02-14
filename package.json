@@ -15,7 +15,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "eslint --fix"
+      "./node_modules/.bin/eslint --fix"
     ]
   },
   "dependencies": {
@@ -31,7 +31,7 @@
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.2.0",
-    "husky": "^7.0.4",
+    "husky": "^4.3.8",
     "lint-staged": "^12.3.4",
     "nodemon": "^2.0.15"
   }
