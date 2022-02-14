@@ -5,6 +5,8 @@ const UserSchema = require('../models/userModel')
 
 const User = mongoose.model('User', UserSchema)
 
+let refreshTokens = []
+
 const signupUser = async (req, res) => {
   try {
     const { password } = req.body
@@ -40,10 +42,17 @@ const signinUser = async (req, res) => {
     }
     if (await bcrypt.compare(password, user[0].password)) {
       const jwtUser = { user: user[0].user }
-      const accessToken = jwt.sign(jwtUser, process.env.JWT_SECRET)
+
+      const accessToken = generateAccessToken(jwtUser)
+      const refreshToken = jwt.sign(jwtUser, process.env.REFRESH_TOKEN_SECRET)
+      refreshTokens.push(refreshToken)
+
       res
         .status(200)
-        .json(({ accessToken: accessToken }))
+        .json(({
+          accessToken: accessToken,
+          refreshToken: refreshToken
+        }))
     } else {
       res
         .status(403)
@@ -54,6 +63,22 @@ const signinUser = async (req, res) => {
       .status(500)
       .json({ error: err })
   }
+}
+
+const signoutUser = (req, res) => {
+  refreshTokens = refreshTokens.filter(token => token !== req.body.refreshToken)
+  res.sendStatus(204)
+}
+
+const token = (req, res) => {
+  const refreshToken = req.body.refreshToken
+  if (!refreshToken) return res.sendStatus(401)
+  if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403)
+  jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403)
+    const accessToken = generateAccessToken({ user: user })
+    res.json({ accessToken: accessToken })
+  })
 }
 
 const getUsers = (req, res) => {
@@ -74,9 +99,15 @@ const findUserByID = (req, res) => {
   })
 }
 
+function generateAccessToken (user) {
+  return jwt.sign(user, process.env.JWT_SECRET, { expiresIn: '15m' })
+}
+
 module.exports = {
   signupUser,
   signinUser,
+  signoutUser,
+  token,
   getUsers,
   findUserByID
 }

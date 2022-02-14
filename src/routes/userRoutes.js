@@ -1,6 +1,8 @@
 const {
   signupUser,
   signinUser,
+  signoutUser,
+  token,
   getUsers,
   findUserByID
 } = require('../controllers/userController')
@@ -14,9 +16,10 @@ const routes = (app) => {
     .post(signinUser)
 
   app.route('/signout')
-    .post((req, res) => {
-      res.json({ message: 'signout user' })
-    })
+    .delete(signoutUser)
+
+  app.route('/token')
+    .post(token)
 
   app.route('/user')
     .get(verifyToken, getUsers)
