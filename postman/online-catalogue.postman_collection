@@ -1,0 +1,443 @@
+{
+	"info": {
+		"_postman_id": "63a0fc83-2e53-4cf7-b756-d106043aafd4",
+		"name": "Online Catalogue",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user_signupUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "user",
+							"value": "testusername",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "fullName",
+							"value": "User Name",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "username@gmail.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:9001/signup",
+					"host": [
+						"localhost"
+					],
+					"port": "9001",
+					"path": [
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user_signinUser",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "user",
+							"value": "testusername",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:9001/signin",
+					"host": [
+						"localhost"
+					],
+					"port": "9001",
+					"path": [
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user_signoutUser",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "refreshToken",
+							"value": "refreshTokenValue",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:9001/signout",
+					"host": [
+						"localhost"
+					],
+					"port": "9001",
+					"path": [
+						"signout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user_refreshToken",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "refreshToken",
+							"value": "refreshTokenValue",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:9001/token",
+					"host": [
+						"localhost"
+					],
+					"port": "9001",
+					"path": [
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user_validateEmail",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9001/validate/email/username@gmail.com",
+					"host": [
+						"localhost"
+					],
+					"port": "9001",
+					"path": [
+						"validate",
+						"email",
+						"username@gmail.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user_getUsers",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdHVzZXJuYW1lIiwiaWF0IjoxNjQ0ODkwMTYxLCJleHAiOjE2NDQ4OTEwNjF9.Cj7hSrzG-a7wXtJZdr_ys1poDs3AKje5k_r8wZ_lwxw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9001/user",
+					"host": [
+						"localhost"
+					],
+					"port": "9001",
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user_findUserByID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdHVzZXJuYW1lIiwiaWF0IjoxNjQ0ODg4ODE1LCJleHAiOjE2NDQ4ODk3MTV9._HRuXXzAL_Jd0_XEaqu-l_Jootcclg7A55Vqp1wVaI0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9001/user/620b02417a16f97497e7a22c",
+					"host": [
+						"localhost"
+					],
+					"port": "9001",
+					"path": [
+						"user",
+						"620b02417a16f97497e7a22c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "book_getBooks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9001/books",
+					"host": [
+						"localhost"
+					],
+					"port": "9001",
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "book_findBookByID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9001/books/620a42cf6887c6d50dc6d38b",
+					"host": [
+						"localhost"
+					],
+					"port": "9001",
+					"path": [
+						"books",
+						"620a42cf6887c6d50dc6d38b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "book_addBook",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdHVzZXJuYW1lIiwiaWF0IjoxNjQ0ODg4ODE1LCJleHAiOjE2NDQ4ODk3MTV9._HRuXXzAL_Jd0_XEaqu-l_Jootcclg7A55Vqp1wVaI0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "author",
+							"value": "Leiko Ravelo but different",
+							"type": "text"
+						},
+						{
+							"key": "title",
+							"value": "A book Title 2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:9001/books",
+					"host": [
+						"localhost"
+					],
+					"port": "9001",
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "invoice_getInvoices",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdHVzZXJuYW1lIiwiaWF0IjoxNjQ0ODkwMDIzLCJleHAiOjE2NDQ4OTA5MjN9.ssqYjSYZdPFJkrdIc__Vf6T8IlIxIfqFt9vLcIwwEoc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9001/invoice",
+					"host": [
+						"localhost"
+					],
+					"port": "9001",
+					"path": [
+						"invoice"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "invoice_addInvoice",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdHVzZXJuYW1lIiwiaWF0IjoxNjQ0ODkwMDIzLCJleHAiOjE2NDQ4OTA5MjN9.ssqYjSYZdPFJkrdIc__Vf6T8IlIxIfqFt9vLcIwwEoc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "userId",
+							"value": "620b02417a16f97497e7a22c",
+							"type": "text"
+						},
+						{
+							"key": "bookList",
+							"value": "620a42cf6887c6d50dc6d38b",
+							"type": "text"
+						},
+						{
+							"key": "bookList",
+							"value": "620a42d36887c6d50dc6d38f",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:9001/invoice",
+					"host": [
+						"localhost"
+					],
+					"port": "9001",
+					"path": [
+						"invoice"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "review_getReviews",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9001/review",
+					"host": [
+						"localhost"
+					],
+					"port": "9001",
+					"path": [
+						"review"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "review_addReview",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdHVzZXJuYW1lIiwiaWF0IjoxNjQ0ODkwNDMyLCJleHAiOjE2NDQ4OTEzMzJ9.Yj2GB9ODDdld_dHCirjhs_14PlB9UrfoqcA5V5rI-ps",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "userId",
+							"value": "620b02417a16f97497e7a22c",
+							"type": "text"
+						},
+						{
+							"key": "bookId",
+							"value": "620a42cf6887c6d50dc6d38b",
+							"type": "text"
+						},
+						{
+							"key": "review",
+							"value": "ok",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:9001/review",
+					"host": [
+						"localhost"
+					],
+					"port": "9001",
+					"path": [
+						"review"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
